@@ -1,0 +1,33 @@
+name: PolarisIndex Data Pipeline
+
+on:
+  schedule:
+    # Runs every 4 hours: 00:00, 04:00, 08:00, 12:00, 16:00, 20:00 UTC
+    - cron: '0 */4 * * *'
+
+  # Allow manual trigger from GitHub Actions tab
+  workflow_dispatch:
+
+jobs:
+  run-pipeline:
+    name: Fetch and Score All Countries
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run World Bank data fetcher
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node lib/api-fetchers/world-bank.js
