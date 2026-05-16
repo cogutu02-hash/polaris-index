@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PolarisIndex — Global Power Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0c10;
+    --paper: #f4f1eb;
+    --cream: #e8e3d8;
+    --gold: #c9a84c;
+    --gold-pale: #e8d5a3;
+    --red: #c23b2a;
+    --teal: #1a6e6e;
+    --teal-light: #2a9d9d;
+    --steel: #2c3e50;
+    --muted: #6b7280;
+    --border: rgba(10,12,16,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Instrument Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .logo {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .logo-star {
+    font-size: 1.1rem;
+    color: var(--gold);
+    animation: pulse-star 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-star {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.9); }
+  }
+
+  .logo-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.08em;
+    color: var(--paper);
+  }
+
+  .logo-name span { color: var(--gold); }
+
+  .logo-tagline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(244,241,235,0.4);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-left: 0.5rem;
+    align-self: center;
+  }
+
+  nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  nav a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(244,241,235,0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold) !important;
+    color: var(--ink) !important;
+    padding: 0.45rem 1.1rem;
+    font-weight: 600 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--gold-pale) !important; }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 6rem 3rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 75% 50%, rgba(201,168,76,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 60% at 20% 80%, rgba(26,110,110,0.1) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    line-height: 1.08;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(244,241,235,0.65);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--ink);
+    padding: 0.85rem 2rem;
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--gold-pale); transform: translateY(-1px); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--paper);
+    padding: 0.85rem 2rem;
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border: 1px solid rgba(244,241,235,0.25);
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); }
+
+  /* Hero stats */
+  .hero-stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    border: 1px solid rgba(244,241,235,0.1);
+    padding: 1.5rem;
+    background: rgba(244,241,235,0.03);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .stat-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40%;
+    height: 2px;
+    background: var(--gold);
+  }
+
+  .stat-card:hover { border-color: rgba(201,168,76,0.4); }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    line-height: 1;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  .stat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(244,241,235,0.45);
+    margin-top: 0.4rem;
+  }
+
+  .live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(194,59,42,0.15);
+    border: 1px solid rgba(194,59,42,0.4);
+    padding: 0.25rem 0.75rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #e06050;
+    margin-bottom: 1rem;
+  }
+
+  .live-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+    animation: blink 1.4s ease infinite;
+  }
+
+  @keyframes blink {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+
+  /* ─── TICKER ─── */
+  .ticker-bar {
+    background: var(--teal);
+    padding: 0.6rem 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ticker-track {
+    display: flex;
+    animation: ticker 40s linear infinite;
+    width: max-content;
+  }
+
+  .ticker-item {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: rgba(244,241,235,0.9);
+    padding: 0 3rem;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .ticker-item .up { color: #5dca8a; }
+  .ticker-item .down { color: #e06050; }
+  .ticker-sep { color: rgba(244,241,235,0.2); }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ─── MAIN CONTENT ─── */
+  main { max-width: 1400px; margin: 0 auto; padding: 0 3rem; }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    padding-top: 4rem;
+  }
+
+  .section-head h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    line-height: 1.15;
+  }
+
+  .section-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    margin-left: 1rem;
+  }
+
+  /* ─── METRICS FRAMEWORK ─── */
+  .metrics-intro {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem;
+    margin-bottom: 3rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .metrics-intro p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(244,241,235,0.75);
+  }
+
+  .metrics-intro p strong { color: var(--gold); }
+
+  .score-display {
+    text-align: center;
+  }
+
+  .score-ring {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 1rem;
+    position: relative;
+  }
+
+  .score-ring svg {
+    transform: rotate(-90deg);
+  }
+
+  .score-ring-val {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .score-big {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .score-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    color: rgba(244,241,235,0.4);
+    text-transform: uppercase;
+  }
+
+  /* ─── METRIC CARDS ─── */
+  .tier-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    margin-top: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .tier-label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: currentColor;
+  }
+
+  .tier-label.tier-1 { color: var(--gold); }
+  .tier-label.tier-2 { color: var(--teal-light); }
+  .tier-label.tier-3 { color: #9b7fc7; }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 1.5px;
+  }
+
+  .metric-card {
+    background: var(--paper);
+    padding: 1.8rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .metric-card:hover { background: var(--cream); }
+
+  .metric-card.expanded { background: var(--cream); }
+
+  .metric-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    color: rgba(10,12,16,0.15);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+
+  .metric-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .metric-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+  }
+
+  .metric-weight {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .weight-bar {
+    height: 2px;
+    background: var(--border);
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .weight-fill {
+    height: 100%;
+    transition: width 1s ease;
+  }
+
+  .tier-1-color { background: var(--gold); }
+  .tier-2-color { background: var(--teal-light); }
+  .tier-3-color { background: #9b7fc7; }
+
+  .metric-desc {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--muted);
+    margin-top: 1rem;
+    display: none;
+  }
+
+  .metric-card.expanded .metric-desc { display: block; }
+
+  .metric-sources {
+    margin-top: 0.75rem;
+    display: none;
+  }
+
+  .metric-card.expanded .metric-sources { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .source-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    background: var(--ink);
+    color: var(--gold);
+    padding: 0.2rem 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .metric-accel {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .accel-up { background: #5dca8a; }
+  .accel-down { background: var(--red); }
+  .accel-neutral { background: var(--gold); }
+
+  /* ─── COUNTRY ANALYZER ─── */
+  .analyzer-section {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem;
+    margin: 4rem -3rem 0;
+  }
+
+  .analyzer-section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .analyzer-section .sub {
+    font-size: 0.9rem;
+    color: rgba(244,241,235,0.5);
+    margin-bottom: 2rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+
+  .country-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+  }
+
+  .country-select-col label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(244,241,235,0.45);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .country-select-col select {
+    width: 100%;
+    background: rgba(244,241,235,0.05);
+    border: 1px solid rgba(244,241,235,0.15);
+    color: var(--paper);
+    padding: 0.85rem 1rem;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+  }
+
+  .country-select-col select option { background: #1a1f2b; }
+
+  .analyze-btn {
+    width: 100%;
+    background: var(--gold);
+    color: var(--ink);
+    padding: 1rem;
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .analyze-btn:hover { background: var(--gold-pale); }
+
+  .radar-col { display: flex; flex-direction: column; gap: 1rem; }
+
+  .radar-bars { display: flex; flex-direction: column; gap: 0.75rem; }
+
+  .radar-row {
+    display: grid;
+    grid-template-columns: 160px 1fr 48px;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .radar-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    color: rgba(244,241,235,0.55);
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .radar-track {
+    background: rgba(244,241,235,0.06);
+    height: 6px;
+    position: relative;
+  }
+
+  .radar-fill {
+    height: 100%;
+    transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+  }
+
+  .radar-score {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    text-align: right;
+  }
+
+  .country-composite {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(244,241,235,0.1);
+    background: rgba(244,241,235,0.03);
+    margin-bottom: 1.5rem;
+  }
+
+  .composite-score {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .composite-info .country-name-big {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .composite-info .rank-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: rgba(244,241,235,0.45);
+    text-transform: uppercase;
+  }
+
+  .positioning-tag {
+    margin-left: auto;
+    padding: 0.5rem 1rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .pos-dominant { background: rgba(93,202,138,0.15); border: 1px solid rgba(93,202,138,0.4); color: #5dca8a; }
+  .pos-strong { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: var(--gold); }
+  .pos-moderate { background: rgba(42,157,157,0.15); border: 1px solid rgba(42,157,157,0.4); color: var(--teal-light); }
+  .pos-emerging { background: rgba(155,127,199,0.15); border: 1px solid rgba(155,127,199,0.4); color: #b09dd8; }
+  .pos-vulnerable { background: rgba(194,59,42,0.15); border: 1px solid rgba(194,59,42,0.4); color: #e06050; }
+
+  /* ─── LIVE FEED ─── */
+  .feed-section {
+    padding: 4rem 0;
+  }
+
+  .feed-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+  }
+
+  .feed-item {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: padding-left 0.2s;
+  }
+
+  .feed-item:hover { padding-left: 0.5rem; }
+
+  .feed-time {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    padding-top: 0.15rem;
+    min-width: 80px;
+  }
+
+  .feed-content {}
+
+  .feed-country {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .feed-headline {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+  }
+
+  .feed-metric-tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(26,110,110,0.12);
+    color: var(--teal-light);
+    border: 1px solid rgba(26,110,110,0.25);
+    padding: 0.15rem 0.5rem;
+  }
+
+  .signal-panel {
+    background: var(--cream);
+    padding: 1.5rem;
+  }
+
+  .signal-panel h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .signal-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .signal-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 0.3rem;
+    flex-shrink: 0;
+  }
+
+  .signal-text {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--steel);
+  }
+
+  .signal-country {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ─── METHODOLOGY ─── */
+  .method-section {
+    background: var(--cream);
+    padding: 4rem 3rem;
+    margin: 0 -3rem;
+  }
+
+  .method-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .method-card {
+    background: var(--paper);
+    padding: 2rem;
+    border-top: 3px solid var(--gold);
+  }
+
+  .method-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .method-card p {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--steel);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink);
+    color: rgba(244,241,235,0.4);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+  }
+
+  footer h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  footer ul { list-style: none; }
+  footer ul li { margin-bottom: 0.5rem; }
+  footer ul li a {
+    font-size: 0.82rem;
+    color: rgba(244,241,235,0.45);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  footer ul li a:hover { color: var(--paper); }
+
+  .footer-brand .logo-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.08em; color: var(--paper); }
+  .footer-brand .logo-name span { color: var(--gold); }
+
+  .footer-brand p {
+    font-size: 0.8rem;
+    line-height: 1.7;
+    margin-top: 0.75rem;
+    color: rgba(244,241,235,0.35);
+  }
+
+  .footer-bottom {
+    background: var(--ink);
+    border-top: 1px solid rgba(244,241,235,0.08);
+    padding: 1.25rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-bottom span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    color: rgba(244,241,235,0.25);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeIn 0.6s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in:nth-child(1) { animation-delay: 0.05s; }
+  .fade-in:nth-child(2) { animation-delay: 0.12s; }
+  .fade-in:nth-child(3) { animation-delay: 0.19s; }
+  .fade-in:nth-child(4) { animation-delay: 0.26s; }
+
+  @media (max-width: 900px) {
+    .hero-grid, .country-grid, .feed-grid, .method-grid { grid-template-columns: 1fr; }
+    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+    footer { grid-template-columns: 1fr 1fr; }
+    header { padding: 0 1.5rem; }
+    main { padding: 0 1.5rem; }
+    .hero { padding: 4rem 1.5rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <span class="logo-star">✦</span>
+    <span class="logo-name">Polaris<span>Index</span></span>
+    <span class="logo-tagline">Global Power Intelligence</span>
+  </div>
+  <nav>
+    <a href="#">Dashboard</a>
+    <a href="#">Countries</a>
+    <a href="#">Metrics</a>
+    <a href="#">Reports</a>
+    <a href="#">Signals</a>
+    <a href="#" class="nav-cta">Crisis Intel →</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Crisis Intelligence Platform · Powered by Live Data</div>
+      <h1>Where Nations<br><em>Stand</em> in the World</h1>
+      <p class="hero-sub">PolarisIndex synthesizes 12 critical power metrics from verified global sources — economic, geopolitical, environmental, and technological — to give analysts and decision-makers a real-time positioning score for every nation.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('analyzer').scrollIntoView({behavior:'smooth'})">Analyze a Country →</button>
+        <button class="btn-ghost" onclick="document.getElementById('metrics').scrollIntoView({behavior:'smooth'})">Explore the 12 Metrics</button>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="live-badge"><span class="live-dot"></span>Live · Updating continuously</div>
+      <div class="stat-row">
+        <div class="stat-card fade-in">
+          <div class="stat-num">195</div>
+          <div class="stat-label">Countries Tracked</div>
+        </div>
+        <div class="stat-card fade-in">
+          <div class="stat-num">12</div>
+          <div class="stat-label">Power Metrics</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-card fade-in">
+          <div class="stat-num">340+</div>
+          <div class="stat-label">Verified Data Sources</div>
+        </div>
+        <div class="stat-card fade-in">
+          <div class="stat-num">4H</div>
+          <div class="stat-label">Update Cadence</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-track">
+    <span class="ticker-item">🇺🇸 USA <span class="up">▲ 84.2</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇨🇳 China <span class="up">▲ 79.6</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇩🇪 Germany <span class="up">▲ 72.1</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇷🇺 Russia <span class="down">▼ 58.3</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇮🇳 India <span class="up">▲ 67.8</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇧🇷 Brazil <span class="up">▲ 52.4</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇸🇦 Saudi Arabia <span class="up">▲ 63.9</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇬🇧 United Kingdom <span class="down">▼ 69.2</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇯🇵 Japan <span class="up">▲ 70.5</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇫🇷 France <span class="up">▲ 68.3</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇦🇺 Australia <span class="up">▲ 65.7</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇿🇦 South Africa <span class="down">▼ 43.1</span> <span class="ticker-sep">|</span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item">🇺🇸 USA <span class="up">▲ 84.2</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇨🇳 China <span class="up">▲ 79.6</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇩🇪 Germany <span class="up">▲ 72.1</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇷🇺 Russia <span class="down">▼ 58.3</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇮🇳 India <span class="up">▲ 67.8</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇧🇷 Brazil <span class="up">▲ 52.4</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇸🇦 Saudi Arabia <span class="up">▲ 63.9</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇬🇧 United Kingdom <span class="down">▼ 69.2</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇯🇵 Japan <span class="up">▲ 70.5</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇫🇷 France <span class="up">▲ 68.3</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇦🇺 Australia <span class="up">▲ 65.7</span> <span class="ticker-sep">|</span></span>
+    <span class="ticker-item">🇿🇦 South Africa <span class="down">▼ 43.1</span> <span class="ticker-sep">|</span></span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+
+  <!-- METRICS FRAMEWORK -->
+  <div id="metrics">
+    <div class="section-head">
+      <span class="section-number">01</span>
+      <h2>The 12 Pillars of National Power</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="metrics-intro">
+      <div>
+        <p>PolarisIndex tracks <strong>12 rigorously selected metrics</strong> — not 10, not 15. Twelve provides the critical mass of data points needed to eliminate blind spots while maintaining analytical coherence. They are structured across three tiers of influence: <strong>Hard Power</strong> (what a nation can do), <strong>Structural Power</strong> (what a nation controls), and <strong>Soft Power</strong> (what a nation can shape).</p>
+        <br>
+        <p>Each metric is weighted by its proven historical correlation to a nation's crisis resilience, global influence, and strategic positioning. Scores are normalised 0–100. The composite <strong>Polaris Score</strong> reflects a nation's total global positioning at this moment in time — updated every 4 hours from live source data.</p>
+      </div>
+      <div class="score-display">
+        <div class="score-ring">
+          <svg width="140" height="140" viewBox="0 0 140 140">
+            <circle cx="70" cy="70" r="58" fill="none" stroke="rgba(244,241,235,0.08)" stroke-width="10"/>
+            <circle cx="70" cy="70" r="58" fill="none" stroke="#c9a84c" stroke-width="10"
+              stroke-dasharray="364" stroke-dashoffset="55" stroke-linecap="round"/>
+          </svg>
+          <div class="score-ring-val">
+            <div class="score-big">84.2</div>
+            <div class="score-sub">USA Score</div>
+          </div>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;color:rgba(244,241,235,0.3);text-transform:uppercase;margin-top:0.5rem;">Example · Polaris Score</div>
+      </div>
+    </div>
+
+    <!-- TIER 1 -->
+    <div class="tier-label tier-1">✦ Tier 1 — Hard Power Metrics · Weight: 50%</div>
+    <div class="metrics-grid">
+
+      <div class="metric-card" onclick="toggleMetric(this)">
+        <span class="metric-accel accel-up"></span>
+        <div class="metric-number">01</div>
+        <div class="metric-icon">📊</div>
+        <div class="metric-name">Economic Output &amp; Trajectory</div>
+        <div class="metric-weight">
+          12% weight
+          <div class="weight-bar"><div class="weight-fill tier-1-color" style="width:72%"></div></div>
+        </div>
+        <div class="metric-desc">GDP (PPP &amp; nominal), GDP growth rate, industrial output, trade balance, and economic diversification index. Captures both current size and momentum.</div>
+        <div class="metric-sources">
+          <span class="source-tag">World Bank</span>
+          <span class="source-tag">IMF WEO</span>
+          <span class="source-tag">OECD</span>
+        </div>
+      </div>
+
+      <div class="metric-card" onclick="toggleMetric(this)">
+        <span class="metric-accel accel-up"></span>
+        <div class="metric-number">02</div>
+        <div class="metric-icon">⚔️</div>
+        <div class="metric-name">Military Capability &amp; Reach</div>
+        <div class="metric-weight">
+          10% weight
+          <div class="weight-bar"><div class="weight-fill tier-1-color" style="width:60%"></div></div>
+        </div>
+        <div class="metric-desc">Active personnel, defence expenditure as % GDP, nuclear status, power projection capability, alliance networks, and equipment modernisation index.</div>
+        <div class="metric-sources">
+          <span class="source-tag">SIPRI</span>
+          <span class="source-tag">GlobalFirepower</span>
+          <span class="source-tag">IISS</span>
+        </div>
+      </div>
+
+      <div class="metric-card" onclick="toggleMetric(this)">
+        <span class="metric-accel accel-neutral"></span>
+        <div class="metric-number">03</div>
+        <div class="metric-icon">⛽</div>
+        <div class="metric-name">Natural Resources &amp; Energy Security</div>
+        <div class="metric-weight">
+          10% weight
+          <div class="weight-bar"><div class="weight-fill tier-1-color" style="width:60%"></div></div>
+        </div>
+        <div class="metric-desc">Proven reserves (oil, gas, minerals, rare earths), food-producing land, fresh water access, energy self-sufficiency ratio, and resource export leverage.</div>
+        <div class="metric-sources">
+          <span class="source-tag">EIA</span>
+          <span class="source-tag">USGS</span>
+          <span class="source-tag">FAO AQUASTAT</span>
+        </div>
+      </div>
+
+      <div class="metric-card" onclick="toggleMetric(this)">
+        <span class="metric-accel accel-up"></span>
+        <div class="metric-number">04</div>
+        <div class="metric-icon">🏗️</div>
+        <div class="metric-name">Infrastructure Development Index</div>
+        <div class="metric-weight">
+          9% weight
+          <div class="weight-bar"><div class="weight-fill tier-1-color" style="width:54%"></div></div>
+        </div>
+        <div class="metric-desc">Transport network quality, port connectivity, electrification rate, internet backbone capacity, urban infrastructure resilience, and cross-border connectivity.</div>
+        <div class="metric-sources">
+          <span class="source-tag">WEF GCI</span>
+          <span class="source-tag">World Bank LPI</span>
+          <span class="source-tag">ITU</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TIER 2 -->
+    <div class="tier-label tier-2">◈ Tier 2 — Structural Power Metrics · Weight: 35%</div>
+    <div class="metrics-grid">
+
+      <div class="metric-card" onclick="toggleMetric(this)">
+        <span class="metric-accel accel-up"></span>
+        <div class="metric-number">05</div>
+        <div class="metric-icon">💻</div>
+        <div class="metric-name">Technological Innovation Capacity</div>
+        <div class="metric-weight">
+          9% weight
+          <div class="weight-bar"><div class="weight-fill tier-2-color" style="width:54%"></div></div>
+        </div>
+        <div class="metric-desc">R&amp;D expenditure, patent filings per capita, AI readiness index, semiconductor capability, and tech unicorn density. The single best predictor of 20-year competitiveness.</div>
+        <div class="metric-sources">
+          <span class="source-tag">WIPO GII</span>
+          <span class="source-tag">OECD MSTI</span>
+          <span class="source-tag">Stanford HAI</span>
+        </div>
+      </div>
+
+      <div class="metric-card" onclick="toggleMetric(this)">
+        <span class="metric-accel accel-up"></span>
+        <div class="metric-number">06</div>
+        <div class="metric-icon">👥</div>
+        <div class="metric-name">Human Capital &amp; Demography</div>
+        <div class="metric-weight">
+          8% weight
+          <div class="weight-bar"><div class="weight-fill tier-2-color" style="width:48%"></div></div>
+        </div>
+        <div class="metric-desc">Education quality, STEM graduate density, working-age population ratio, brain drain/gain index, and healthcare system quality. Future power runs on talent pipelines.</div>
+        <div class="metric-sources">
+          <span class="source-tag">UNDP HDI</span>
+          <span class="source-tag">UNESCO</span>
+          <span class="source-tag">PISA</span>
+        </div>
+      </div>
+
+      <div class="metric-card" onclick="toggleMetric(this)">
+        <span class="metric-accel accel-down"></span>
+        <div class="metric-number">07</div>
+        <div class="metric-icon">⚖️</div>
+        <div class="metric-name">Governance &amp; Institutional Strength</div>
+        <div class="metric-weight">
+          8% weight
+          <div class="weight-bar"><div class="weight-fill tier-2-color" style="width:48%"></div></div>
+        </div>
+        <div class="metric-desc">Rule of law, corruption perception, state effectiveness, regulatory quality, political stability, and civil liberties. Institutions determine whether other strengths can be leveraged.</div>
+        <div class="metric-sources">
+          <span class="source-tag">World Bank WGI</span>
+          <span class="source-tag">TI CPI</span>
+          <span class="source-tag">Freedom House</span>
+        </div>
+      </div>
+
+      <div class="metric-card" onclick="toggleMetric(this)">
+        <span class="metric-accel accel-neutral"></span>
+        <div class="metric-number">08</div>
+        <div class="metric-icon">🤝</div>
+        <div class="metric-name">Trade Network &amp; Economic Interdependence</div>
+        <div class="metric-weight">
+          6% weight
+          <div class="weight-bar"><div class="weight-fill tier-2-color" style="width:36%"></div></div>
+        </div>
+        <div class="metric-desc">Trade openness index, number of bilateral FTAs, export market diversification, global value chain integration, and foreign currency reserve adequacy.</div>
+        <div class="metric-sources">
+          <span class="source-tag">WTO</span>
+          <span class="source-tag">UN Comtrade</span>
+          <span class="source-tag">BIS</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TIER 3 -->
+    <div class="tier-label tier-3">◇ Tier 3 — Soft Power Metrics · Weight: 15%</div>
+    <div class="metrics-grid">
+
+      <div class="metric-card" onclick="toggleMetric(this)">
+        <span class="metric-accel accel-up"></span>
+        <div class="metric-number">09</div>
+        <div class="metric-icon">🌐</div>
+        <div class="metric-name">Geopolitical Influence &amp; Alliances</div>
+        <div class="metric-weight">
+          4% weight
+          <div class="weight-bar"><div class="weight-fill tier-3-color" style="width:24%"></div></div>
+        </div>
+        <div class="metric-desc">UN Security Council weight, multilateral body memberships, military alliance treaties, diplomatic representation footprint, and foreign aid leverage.</div>
+        <div class="metric-sources">
+          <span class="source-tag">UN</span>
+          <span class="source-tag">Lowy Inst.</span>
+          <span class="source-tag">CFR</span>
+        </div>
+      </div>
+
+      <div class="metric-card" onclick="toggleMetric(this)">
+        <span class="metric-accel accel-neutral"></span>
+        <div class="metric-number">10</div>
+        <div class="metric-icon">🌿</div>
+        <div class="metric-name">Environmental Resilience &amp; Climate Risk</div>
+        <div class="metric-weight">
+          4% weight
+          <div class="weight-bar"><div class="weight-fill tier-3-color" style="width:24%"></div></div>
+        </div>
+        <div class="metric-desc">Climate vulnerability index, renewable energy transition pace, ecosystem health, disaster risk rating, and environmental policy effectiveness. Long-term stability anchor.</div>
+        <div class="metric-sources">
+          <span class="source-tag">ND-GAIN</span>
+          <span class="source-tag">IPCC</span>
+          <span class="source-tag">EPI Yale</span>
+        </div>
+      </div>
+
+      <div class="metric-card" onclick="toggleMetric(this)">
+        <span class="metric-accel accel-up"></span>
+        <div class="metric-number">11</div>
+        <div class="metric-icon">📡</div>
+        <div class="metric-name">Information &amp; Media Power</div>
+        <div class="metric-weight">
+          4% weight
+          <div class="weight-bar"><div class="weight-fill tier-3-color" style="width:24%"></div></div>
+        </div>
+        <div class="metric-desc">Press freedom, global media reach, disinformation resilience, cyber defence maturity, and digital sovereignty capacity. The modern battlefield is narratives.</div>
+        <div class="metric-sources">
+          <span class="source-tag">RSF Press Freedom</span>
+          <span class="source-tag">NCSI</span>
+          <span class="source-tag">Oxford OII</span>
+        </div>
+      </div>
+
+      <div class="metric-card" onclick="toggleMetric(this)">
+        <span class="metric-accel accel-up"></span>
+        <div class="metric-number">12</div>
+        <div class="metric-icon">✨</div>
+        <div class="metric-name">Cultural &amp; Soft Power Projection</div>
+        <div class="metric-weight">
+          3% weight
+          <div class="weight-bar"><div class="weight-fill tier-3-color" style="width:18%"></div></div>
+        </div>
+        <div class="metric-desc">Brand Finance Nation Brand ranking, tourism arrivals, language spread, diaspora influence, higher education attractiveness, and cultural export value.</div>
+        <div class="metric-sources">
+          <span class="source-tag">Portland Soft Power 30</span>
+          <span class="source-tag">Anholt-Ipsos</span>
+          <span class="source-tag">UNWTO</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COUNTRY ANALYZER -->
+  <div id="analyzer" class="analyzer-section">
+    <h2>Country Positioning Analyzer</h2>
+    <p class="sub">Select a country to generate a live Polaris Score across all 12 metrics · Last sync: 4 hours ago</p>
+
+    <div class="country-grid">
+      <div class="country-select-col">
+        <label>Select Country</label>
+        <select id="countrySelect">
+          <option value="usa">🇺🇸 United States</option>
+          <option value="china">🇨🇳 China</option>
+          <option value="germany">🇩🇪 Germany</option>
+          <option value="india">🇮🇳 India</option>
+          <option value="russia">🇷🇺 Russia</option>
+          <option value="uk">🇬🇧 United Kingdom</option>
+          <option value="japan">🇯🇵 Japan</option>
+          <option value="france">🇫🇷 France</option>
+          <option value="brazil">🇧🇷 Brazil</option>
+          <option value="saudi">🇸🇦 Saudi Arabia</option>
+          <option value="australia">🇦🇺 Australia</option>
+          <option value="southafrica">🇿🇦 South Africa</option>
+          <option value="nigeria">🇳🇬 Nigeria</option>
+          <option value="indonesia">🇮🇩 Indonesia</option>
+          <option value="turkey">🇹🇷 Turkey</option>
+        </select>
+
+        <label>Report Depth</label>
+        <select id="depthSelect">
+          <option>Executive Summary</option>
+          <option>Full Intelligence Brief</option>
+          <option>Crisis Risk Assessment</option>
+          <option>Comparative Analysis</option>
+        </select>
+
+        <button class="analyze-btn" onclick="analyzeCountry()">Generate Polaris Score →</button>
+
+        <div style="margin-top:1.5rem;padding:1.25rem;border:1px solid rgba(244,241,235,0.08);background:rgba(244,241,235,0.02);">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;color:rgba(244,241,235,0.3);text-transform:uppercase;margin-bottom:0.75rem;">Active Data Sources</div>
+          <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+            <span class="source-tag">World Bank</span>
+            <span class="source-tag">IMF</span>
+            <span class="source-tag">SIPRI</span>
+            <span class="source-tag">UNDP</span>
+            <span class="source-tag">WIPO</span>
+            <span class="source-tag">WTO</span>
+            <span class="source-tag">ND-GAIN</span>
+            <span class="source-tag">Freedom House</span>
+            <span class="source-tag">EIA</span>
+            <span class="source-tag">ITU</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="radar-col" id="radarDisplay">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:rgba(244,241,235,0.3);letter-spacing:0.1em;padding:2rem;text-align:center;border:1px dashed rgba(244,241,235,0.08);">
+          Select a country and click Generate to load the Polaris Score dashboard
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIVE INTEL FEED -->
+  <div class="feed-section">
+    <div class="section-head">
+      <span class="section-number">02</span>
+      <h2>Live Intelligence Feed</h2>
+      <div class="section-rule"></div>
+      <div class="live-badge" style="margin-left:auto;"><span class="live-dot"></span>Auto-updating</div>
+    </div>
+
+    <div class="feed-grid">
+      <div class="feed-list">
+
+        <div class="feed-item">
+          <div class="feed-time">2h ago</div>
+          <div class="feed-content">
+            <div class="feed-country">🇮🇳 India</div>
+            <div class="feed-headline">India surpasses Germany to become world's 3rd-largest economy by PPP — IMF Spring 2026 WEO confirms GDP at $15.7T</div>
+            <span class="feed-metric-tag">Economic Output</span>
+            <span class="feed-metric-tag">Human Capital</span>
+          </div>
+        </div>
+
+        <div class="feed-item">
+          <div class="feed-time">5h ago</div>
+          <div class="feed-content">
+            <div class="feed-country">🇸🇦 Saudi Arabia</div>
+            <div class="feed-headline">Saudi Arabia accelerates Vision 2030 infrastructure spending to $1.1T — 14 gigaprojects now under simultaneous construction</div>
+            <span class="feed-metric-tag">Infrastructure</span>
+            <span class="feed-metric-tag">Natural Resources</span>
+          </div>
+        </div>
+
+        <div class="feed-item">
+          <div class="feed-time">8h ago</div>
+          <div class="feed-content">
+            <div class="feed-country">🇨🇳 China</div>
+            <div class="feed-headline">China files 69,610 international patents in Q1 2026 — maintains 4-year lead in global patent volume, AI filings up 34%</div>
+            <span class="feed-metric-tag">Technology</span>
+            <span class="feed-metric-tag">Economic Output</span>
+          </div>
+        </div>
+
+        <div class="feed-item">
+          <div class="feed-time">12h ago</div>
+          <div class="feed-content">
+            <div class="feed-country">🇳🇬 Nigeria</div>
+            <div class="feed-headline">Nigeria's governance index falls 4 points amid fuel subsidy crisis — political stability sub-score drops to 31/100 in latest WGI snapshot</div>
+            <span class="feed-metric-tag">Governance</span>
+            <span class="feed-metric-tag">Energy Security</span>
+          </div>
+        </div>
+
+        <div class="feed-item">
+          <div class="feed-time">16h ago</div>
+          <div class="feed-content">
+            <div class="feed-country">🇩🇪 Germany</div>
+            <div class="feed-headline">Bundeswehr modernisation programme approved — €100B special fund deployment raises military capability score by 6 points</div>
+            <span class="feed-metric-tag">Military Capability</span>
+            <span class="feed-metric-tag">Geopolitical Influence</span>
+          </div>
+        </div>
+
+        <div class="feed-item">
+          <div class="feed-time">1d ago</div>
+          <div class="feed-content">
+            <div class="feed-country">🇦🇺 Australia</div>
+            <div class="feed-headline">Australia's critical minerals export value reaches $28.6B — rare earth leverage index now 3rd globally behind China and DRC</div>
+            <span class="feed-metric-tag">Natural Resources</span>
+            <span class="feed-metric-tag">Trade Network</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="signal-panel">
+        <h3>⚡ Active Risk Signals</h3>
+
+        <div class="signal-item">
+          <div class="signal-dot" style="background:#e06050;"></div>
+          <div class="signal-text"><span class="signal-country">Russia</span> — Military expenditure exceeds 7.2% GDP; infrastructure deterioration accelerating. Crisis risk: HIGH</div>
+        </div>
+
+        <div class="signal-item">
+          <div class="signal-dot" style="background:#e06050;"></div>
+          <div class="signal-text"><span class="signal-country">Pakistan</span> — Composite score dropped 8 pts in 30 days. Fiscal + governance dual pressure. Crisis risk: ELEVATED</div>
+        </div>
+
+        <div class="signal-item">
+          <div class="signal-dot" style="background:#f0a030;"></div>
+          <div class="signal-text"><span class="signal-country">Turkey</span> — Currency volatility impacting trade network score. Watch economic trajectory metric. Risk: MODERATE</div>
+        </div>
+
+        <div class="signal-item">
+          <div class="signal-dot" style="background:#f0a030;"></div>
+          <div class="signal-text"><span class="signal-country">Ethiopia</span> — Infrastructure index recovering post-conflict but governance gap persists. Risk: MODERATE</div>
+        </div>
+
+        <div class="signal-item">
+          <div class="signal-dot" style="background:#5dca8a;"></div>
+          <div class="signal-text"><span class="signal-country">Vietnam</span> — Technology score surges 11 pts YoY. FDI inflows hitting record levels. Trajectory: POSITIVE</div>
+        </div>
+
+        <div class="signal-item">
+          <div class="signal-dot" style="background:#5dca8a;"></div>
+          <div class="signal-text"><span class="signal-country">UAE</span> — Soft power + infrastructure scores converge at record high. Vision 2031 tracking ahead. Trajectory: STRONG</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- METHODOLOGY -->
+<div class="method-section">
+  <main>
+    <div class="section-head">
+      <span class="section-number">03</span>
+      <h2>How PolarisIndex Works</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="method-grid">
+      <div class="method-card">
+        <h3>Live Source Aggregation</h3>
+        <p>Every 4 hours, PolarisIndex crawls 340+ verified datasets from the World Bank, IMF, SIPRI, UNDP, WIPO, WTO, and 30+ other institutional sources. When a new valid report is published, it is automatically ingested and the relevant national scores are recalculated in real time.</p>
+      </div>
+      <div class="method-card">
+        <h3>Weighted Composite Scoring</h3>
+        <p>Each of the 12 metrics is normalised to a 0–100 scale and then weighted by its empirically validated contribution to national power outcomes. Tier 1 Hard Power metrics carry 50% of the composite. Tier 2 Structural carries 35%. Tier 3 Soft Power carries 15%. Weights are reviewed bi-annually.</p>
+      </div>
+      <div class="method-card">
+        <h3>Why 12 Metrics?</h3>
+        <p>10 leaves blind spots in critical areas like information power and environmental resilience — increasingly decisive in 21st-century crises. 15+ introduces noise and correlation overlap. 12 is the minimum set that passes our coverage threshold while maintaining analytical independence between pillars.</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="logo-name">Polaris<span>Index</span></div>
+    <p>The north star of global power intelligence. Built for crisis analysts, strategic advisors, and decision-makers who need to know where nations truly stand — not where they claim to.</p>
+  </div>
+  <div>
+    <h4>Platform</h4>
+    <ul>
+      <li><a href="#">Country Dashboard</a></li>
+      <li><a href="#">Metric Explorer</a></li>
+      <li><a href="#">Crisis Signals</a></li>
+      <li><a href="#">Report Archive</a></li>
+      <li><a href="#">API Access</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Intelligence</h4>
+    <ul>
+      <li><a href="#">Methodology</a></li>
+      <li><a href="#">Data Sources</a></li>
+      <li><a href="#">Score History</a></li>
+      <li><a href="#">Analyst Notes</a></li>
+      <li><a href="#">Briefings</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Organisation</h4>
+    <ul>
+      <li><a href="#">About Crisis Intel</a></li>
+      <li><a href="#">Research Team</a></li>
+      <li><a href="#">Press</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2026 Crisis Intel · PolarisIndex™ · All data sourced from public institutional repositories</span>
+  <span>Built for strategic decision-making · Not investment advice</span>
+</div>
+
+<script>
+  // ─── METRIC CARD TOGGLE ───
+  function toggleMetric(card) {
+    const wasExpanded = card.classList.contains('expanded');
+    document.querySelectorAll('.metric-card').forEach(c => c.classList.remove('expanded'));
+    if (!wasExpanded) card.classList.add('expanded');
+  }
+
+  // ─── COUNTRY DATA ───
+  const countryData = {
+    usa:         { name: "United States", flag: "🇺🇸", score: 84, pos: "dominant", scores: [96,91,72,88,90,82,78,86,95,62,80,88] },
+    china:       { name: "China",         flag: "🇨🇳", score: 79, pos: "dominant", scores: [88,84,85,90,86,78,42,82,72,56,65,68] },
+    germany:     { name: "Germany",       flag: "🇩🇪", score: 72, pos: "strong",   scores: [78,62,48,84,80,82,85,86,68,72,74,76] },
+    india:       { name: "India",         flag: "🇮🇳", score: 67, pos: "strong",   scores: [76,68,60,62,72,74,58,64,66,55,52,60] },
+    russia:      { name: "Russia",        flag: "🇷🇺", score: 58, pos: "moderate", scores: [54,82,88,50,42,46,30,44,70,40,38,44] },
+    uk:          { name: "United Kingdom",flag: "🇬🇧", score: 69, pos: "strong",   scores: [70,70,36,72,72,78,78,80,82,60,82,84] },
+    japan:       { name: "Japan",         flag: "🇯🇵", score: 70, pos: "strong",   scores: [78,56,22,86,88,82,80,82,66,58,74,78] },
+    france:      { name: "France",        flag: "🇫🇷", score: 68, pos: "strong",   scores: [72,68,30,76,70,76,72,74,80,64,76,82] },
+    brazil:      { name: "Brazil",        flag: "🇧🇷", score: 52, pos: "moderate", scores: [58,46,80,54,44,58,48,56,44,60,42,50] },
+    saudi:       { name: "Saudi Arabia",  flag: "🇸🇦", score: 63, pos: "strong",   scores: [68,64,98,78,54,52,40,66,66,42,52,60] },
+    australia:   { name: "Australia",     flag: "🇦🇺", score: 65, pos: "strong",   scores: [72,52,86,70,68,76,82,72,58,66,70,72] },
+    southafrica: { name: "South Africa",  flag: "🇿🇦", score: 43, pos: "emerging", scores: [40,34,58,40,36,50,44,42,38,48,42,46] },
+    nigeria:     { name: "Nigeria",       flag: "🇳🇬", score: 34, pos: "vulnerable",scores: [38,28,74,28,24,38,30,34,28,42,32,30] },
+    indonesia:   { name: "Indonesia",     flag: "🇮🇩", score: 54, pos: "moderate", scores: [60,42,72,52,48,60,52,56,42,52,46,48] },
+    turkey:      { name: "Turkey",        flag: "🇹🇷", score: 50, pos: "moderate", scores: [50,58,38,60,52,58,46,50,54,46,48,52] }
+  };
+
+  const metricNames = [
+    "Economic Output","Military Capability","Natural Resources","Infrastructure",
+    "Technology","Human Capital","Governance","Trade Networks",
+    "Geopolitical Influence","Environmental Resilience","Information Power","Soft Power"
+  ];
+
+  const tierColors = {
+    dominant:  { tag: "Dominant Power",  cls: "pos-dominant" },
+    strong:    { tag: "Strong Posture",  cls: "pos-strong" },
+    moderate:  { tag: "Moderate Actor",  cls: "pos-moderate" },
+    emerging:  { tag: "Emerging Power",  cls: "pos-emerging" },
+    vulnerable:{ tag: "Structurally Vulnerable", cls: "pos-vulnerable" }
+  };
+
+  const barColors = ["tier-1-color","tier-1-color","tier-1-color","tier-1-color","tier-2-color","tier-2-color","tier-2-color","tier-2-color","tier-3-color","tier-3-color","tier-3-color","tier-3-color"];
+
+  function analyzeCountry() {
+    const key = document.getElementById('countrySelect').value;
+    const c = countryData[key];
+    const tier = tierColors[c.pos];
+
+    let html = `
+      <div class="country-composite">
+        <div class="composite-score">${c.score}</div>
+        <div class="composite-info">
+          <div class="country-name-big">${c.flag} ${c.name}</div>
+          <div class="rank-label">Polaris Score · 12-Metric Composite · /100</div>
+        </div>
+        <div class="positioning-tag ${tier.cls}">${tier.tag}</div>
+      </div>
+      <div class="radar-bars">
+    `;
+
+    c.scores.forEach((s, i) => {
+      const colorMap = ['#c9a84c','#c9a84c','#c9a84c','#c9a84c','#2a9d9d','#2a9d9d','#2a9d9d','#2a9d9d','#9b7fc7','#9b7fc7','#9b7fc7','#9b7fc7'];
+      const textColor = s >= 70 ? '#5dca8a' : s >= 45 ? '#c9a84c' : '#e06050';
+      html += `
+        <div class="radar-row">
+          <div class="radar-label">${metricNames[i]}</div>
+          <div class="radar-track">
+            <div class="radar-fill" style="width:0%;background:${colorMap[i]};transition:width 1.2s cubic-bezier(0.25,0.46,0.45,0.94);transition-delay:${i*0.06}s" data-target="${s}"></div>
+          </div>
+          <div class="radar-score" style="color:${textColor}">${s}</div>
+        </div>`;
+    });
+
+    html += '</div>';
+    document.getElementById('radarDisplay').innerHTML = html;
+
+    // animate bars
+    setTimeout(() => {
+      document.querySelectorAll('.radar-fill').forEach(bar => {
+        bar.style.width = bar.getAttribute('data-target') + '%';
+      });
+    }, 50);
+  }
+
+  // Auto-run with USA on load
+  window.onload = () => {
+    analyzeCountry();
+    // animate weight bars
+    document.querySelectorAll('.weight-fill').forEach(el => {
+      const w = el.style.width;
+      el.style.width = '0';
+      setTimeout(() => { el.style.width = w; }, 300);
+    });
+  };
+</script>
+
+</body>
+</html>
