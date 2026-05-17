@@ -1693,5 +1693,59 @@
   };
 </script>
 
-</body>
+<script>
+  const API = 'https://polaris-api.cogutu02.workers.dev';
+
+  async function loadRankings() {
+    try {
+      const res = await fetch(API + '/api/rankings');
+      const countries = await res.json();
+      const el = document.getElementById('rankings-body');
+      if (!el || !countries.length) return;
+      el.innerHTML = countries.map(c => `
+        <tr>
+          <td style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);padding:0.75rem 1rem;">${c.global_rank}</td>
+          <td style="padding:0.75rem 1rem;">${c.flag_emoji || ''} ${c.name}</td>
+          <td style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;padding:0.75rem 1rem;">${c.polaris_score}</td>
+          <td style="padding:0.75rem 1rem;"><span style="font-family:'IBM Plex Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.6rem;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.4);color:var(--gold);">${c.positioning}</span></td>
+        </tr>
+      `).join('');
+    } catch(e) { console.error('Rankings load failed:', e); }
+  }
+
+  async function loadCountryAnalyzer() {
+    try {
+      const res = await fetch(API + '/api/rankings');
+      const countries = await res.json();
+      const sel = document.querySelector('.country-select-col select');
+      if (!sel || !countries.length) return;
+      sel.innerHTML = countries.map(c =>
+        `<option value="${c.country_iso3}">${c.flag_emoji || ''} ${c.name}</option>`
+      ).join('');
+      sel.addEventListener('change', () => loadCountryData(sel.value));
+      loadCountryData(countries[0].country_iso3);
+    } catch(e) { console.error('Analyzer load failed:', e); }
+  }
+
+  async function loadCountryData(iso3) {
+    try {
+      const res = await fetch(`${API}/api/country?iso3=${iso3}`);
+      const c = await res.json();
+      if (!c) return;
+      const scoreEl = document.querySelector('.composite-score');
+      const nameEl = document.querySelector('.country-name-big');
+      const rankEl = document.querySelector('.rank-label');
+      const posEl = document.querySelector('.positioning-tag');
+      if (scoreEl) scoreEl.textContent = c.polaris_score;
+      if (nameEl) nameEl.textContent = c.name;
+      if (rankEl) rankEl.textContent = `Global Rank #${c.global_rank} · ${c.region || ''}`;
+      if (posEl) { posEl.textContent = c.positioning; posEl.className = 'positioning-tag pos-' + c.positioning.toLowerCase(); }
+    } catch(e) { console.error('Country load failed:', e); }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadRankings();
+    loadCountryAnalyzer();
+  });
+</script></body>
 </html>
