@@ -1785,7 +1785,7 @@ console.log('async function loadFeed() {
   document.addEventListener('DOMContentLoaded', () => {
     loadRankings();
     loadCountryAnalyzer();
-    loadFeed();
+    setTimeout(loadFeed, 2000);
   });
 </script></body>
 </html>
