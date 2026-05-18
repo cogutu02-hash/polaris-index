@@ -1401,7 +1401,7 @@
     </div>
 
     <div class="feed-grid">
-      <div class="feed-list">
+      <div class="<div class="feed-list" id="feed-list">">
 
         <div class="feed-item">
           <div class="feed-time">2h ago</div>
@@ -1747,7 +1747,7 @@
     try {
       const res = await fetch(API + '/api/feed');
       const items = await res.json();
-      const feedEl = document.querySelector('.feed-list');
+      const feedEl = document.getElementById('feed-list');
 console.log('async function loadFeed() {
     try {
       const res = await fetch(API + '/api/feed');
