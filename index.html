@@ -1747,7 +1747,7 @@
     try {
       const res = await fetch(API + '/api/feed');
       const items = await res.json();
-      const feedEl = document.querySelector('.feed-grid > div') || document.querySelector('.feed-section > div') || document.querySelector('.feed-section');
+      const feedEl = document.querySelector('.feed-list');
 console.log('async function loadFeed() {
     try {
       const res = await fetch(API + '/api/feed');
