@@ -1748,7 +1748,26 @@
       const res = await fetch(API + '/api/feed');
       const items = await res.json();
       const feedEl = document.querySelector('.feed-grid > div') || document.querySelector('.feed-section > div') || document.querySelector('.feed-section');
-console.log('Feed element found:', feedEl);
+console.log('async function loadFeed() {
+    try {
+      const res = await fetch(API + '/api/feed');
+      const items = await res.json();
+      if (!items.length) return;
+      const allDivs = document.querySelectorAll('.feed-item');
+      const feedParent = allDivs.length ? allDivs[0].parentElement : null;
+      if (!feedParent) return;
+      feedParent.innerHTML = items.map(c => `
+        <div class="feed-item">
+          <div class="feed-time">LIVE</div>
+          <div class="feed-content">
+            <div class="feed-country">${c.flag_emoji || ''} ${c.name} · Rank #${c.global_rank}</div>
+            <div class="feed-headline">${c.intel}</div>
+            <span class="feed-metric-tag">${c.positioning}</span>
+          </div>
+        </div>
+      `).join('');
+    } catch(e) { console.error('Feed load failed:', e); }
+  }:', feedEl);
       if (!feedEl || !items.length) return;
       feedEl.innerHTML = items.map(c => `
         <div class="feed-item">
